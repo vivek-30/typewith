@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "build": "webpack",
-    "serve": "webpack serve"
+    "start": "webpack serve"
   },
   "keywords": [
     "TypeWith",
