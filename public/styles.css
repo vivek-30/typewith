@@ -1,0 +1,26 @@
+body {
+    background: #eee;
+}
+
+#content {
+    height: 75vh;
+    resize: none;
+    font-size: 18px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#content:focus {
+    outline: none;
+}
+
+#settings-tab, #dashboard {
+    padding: 1rem;
+}
+
+.setting {
+    margin: 1rem;
+}
+
+.setting label i {
+    margin: 7px;
+}
