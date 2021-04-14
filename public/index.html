@@ -4,9 +4,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TypeWith</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-    <h1>TypeWith</h1>
+    <div class="section">
+        <div class="row">
+            <div class="col s3 m3 l3" id="sidebar">
+                <div id="settings-tab">
+                    <div class="setting">
+                        <label>
+                            <input type="checkbox" id="share">
+                            <span>Share Your Work</span>
+                            <i class="material-icons">visibility</i>
+                        </label>
+                    </div>
+                    <div class="setting">
+                        <label>
+                            <input type="checkbox" id="read-only">
+                            <span>Make Your Work ReadOnly</span>
+                            <i class="material-icons">pan_tool</i>
+                        </label>
+                    </div>
+                </div>
+                <div id="dashboard">
+                    <p class="notification">No New Notifications.</p>
+                </div>
+            </div>
+            <main class="col s9 m9 l9">
+                <nav>
+                    <div class="nav-wrapper blue-grey lighten-2">
+                        <span id="title" class="brand-logo center">TypeWith</span>
+                    </div>
+                </nav>
+                <div id="type-pad">
+                    <textarea id="content" name="text-area" class="white"></textarea>
+                </div>
+                <div id="toolbar" class="left" style="text-align: left !important;">
+                    <div class="fixed-action-btn">
+                        <a class="btn-floating btn-large red">
+                          <i class="large material-icons">mode_edit</i>
+                        </a>
+                        <ul>
+                          <li><a class="btn-floating red"><i class="material-icons">text_format</i></a></li>
+                          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
+                          <li><a class="btn-floating green"><i class="material-icons">file_download</i></a></li>
+                          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
 
     <!-- Js File -->
     <script src="./bundle.js"></script>
