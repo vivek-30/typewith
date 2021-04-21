@@ -4,10 +4,11 @@
   "description": "A simple collaborative text editor made with typescript and websocket.",
   "main": "index.ts",
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack",
     "start": "webpack serve",
-    "server": "nodemon server/server.js",
-    "dev": "concurrently --kill-others \"npm run server\" \"npm start\""
+    "server": "node server/server.js",
+    "dev-server": "nodemon server/server.js",
+    "dev": "concurrently --kill-others \"npm run dev-server\" \"npm start\""
   },
   "keywords": [
     "TypeWith",
