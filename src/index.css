@@ -3,7 +3,7 @@ body {
 }
 
 #content {
-    height: 75vh;
+    height: 78vh;
     resize: none;
     font-size: 18px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -23,4 +23,8 @@ body {
 
 .setting label i {
     margin: 7px;
+}
+
+#type-pad textarea {
+    padding: 10px;
 }
