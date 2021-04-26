@@ -12,7 +12,7 @@
     <div class="section">
         <div class="row">
             <div class="col s3 m3 l3" id="sideBar">
-                <button class="btn-floating teal" id="drawer-btn">
+                <button class="btn-floating blue-grey darken-1" id="drawer-btn">
                     <i class="material-icons">chevron_right</i>
                 </button>
                 <div id="settings-tab">
@@ -44,16 +44,19 @@
                 <div id="type-pad">
                     <textarea id="content" name="text-area" class="white"></textarea>
                 </div>
-                <div id="toolbar" class="left" style="text-align: left !important;">
+                <div id="toolbar" class="left">
                     <div class="fixed-action-btn">
-                        <button class="btn-floating btn-large red" id="toolbar-btn">
-                          <i class="large material-icons">mode_edit</i>
+                        <button class="btn-floating btn-large teal" id="toolbar-btn">
+                            <i class="large material-icons">mode_edit</i>
                         </button>
-                        <ul>
-                          <li><a class="btn-floating red"><i class="material-icons">text_format</i></a></li>
-                          <li><a class="btn-floating yellow darken-1"><i class="material-icons">format_quote</i></a></li>
-                          <li><a class="btn-floating green"><i class="material-icons">file_download</i></a></li>
-                          <li><a class="btn-floating blue"><i class="material-icons">attach_file</i></a></li>
+                        <ul id="tools">
+                            <li><a class="btn-floating red"><i class="material-icons">text_format</i></a></li>
+                            <li><a class="btn-floating purple">
+                                <input type="color" id="color-picker">
+                                <i class="material-icons">color_lens</i>
+                            </a></li>
+                            <li><a class="btn-floating green"><i class="material-icons">save</i></a></li>
+                            <li><a class="btn-floating blue"><i class="material-icons">add</i></a></li>
                         </ul>
                     </div>
                 </div>

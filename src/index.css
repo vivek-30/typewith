@@ -36,6 +36,14 @@ body {
     padding: 10px;
 }
 
+#toolbar {
+    text-align: left !important;
+}
+
+#color-picker {
+    display: none;
+}
+
 /* Drawer transition */
 .close-drawer div {
     display: none !important;
