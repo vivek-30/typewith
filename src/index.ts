@@ -1,13 +1,14 @@
 import { FloatingActionButton } from 'materialize-css';
+import { ToolBarButton, drawerBtn } from './Elements';
+import { handleSideBarDisplay } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
-import './index.css'
+import './index.css';
 
-document.addEventListener('DOMContentLoaded', function() {
-    var elems = document.querySelectorAll('.fixed-action-btn');
-    FloatingActionButton.init(elems, {
-        direction: 'left',
-        hoverEnabled: false
-    });
+FloatingActionButton.init(ToolBarButton, {
+    direction: 'left',
+    hoverEnabled: false
 });
+
+drawerBtn.addEventListener('click', handleSideBarDisplay);
 
 console.log('Working With TypeScript.');
