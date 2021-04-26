@@ -13,6 +13,13 @@ body {
     outline: none;
 }
 
+#drawer-btn {
+    position: absolute;
+    top: 40%;
+    bottom: 50%;
+    left: 23%;
+}
+
 #settings-tab, #dashboard {
     padding: 1rem;
 }
@@ -27,4 +34,18 @@ body {
 
 #type-pad textarea {
     padding: 10px;
+}
+
+/* Drawer transition */
+.close-drawer div {
+    display: none !important;
+}
+
+.close-drawer #drawer-btn {
+    left: 0% !important;
+}
+
+.full-width {
+    width: 99% !important;
+    margin: 5px auto !important;
 }
