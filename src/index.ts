@@ -1,6 +1,6 @@
 import { FloatingActionButton } from 'materialize-css';
-import { ToolBarButton, drawerBtn } from './Elements';
-import { handleSideBarDisplay } from './helperFunctions';
+import { ToolBarButton, drawerBtn, tools } from './Elements';
+import { handleSideBarDisplay, handleUsersToolChoice } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
 
@@ -10,5 +10,4 @@ FloatingActionButton.init(ToolBarButton, {
 });
 
 drawerBtn.addEventListener('click', handleSideBarDisplay);
-
-console.log('Working With TypeScript.');
+tools.addEventListener('click', handleUsersToolChoice);
