@@ -1,6 +1,9 @@
 export const ToolBarButton = document.querySelector('.fixed-action-btn') as HTMLDivElement;
-export const drawerBtn = document.querySelector('#drawer-btn') as HTMLButtonElement;
-export const sideBar = document.querySelector('#sideBar') as HTMLDivElement;
-export const main = document.querySelector('main')!;
+export const drawerBtn = document.getElementById('drawer-btn') as HTMLButtonElement;
+export const toolBarBtn = document.getElementById('toolbar-btn') as HTMLButtonElement;
+export const colorPicker = document.getElementById('color-picker') as HTMLInputElement;
+export const content = document.getElementById('content') as HTMLTextAreaElement;
+export const tools = document.getElementById('tools') as HTMLUListElement;
+export const sideBar = document.getElementById('sideBar') as HTMLDivElement;
 export const drawerBtnIcon = drawerBtn.querySelector('i') as HTMLElement;
-export const toolBarBtn = drawerBtn.querySelector('#toolBarBtn') as HTMLButtonElement;
+export const main = document.querySelector('main')!;
