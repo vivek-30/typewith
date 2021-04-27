@@ -1,4 +1,5 @@
 import { drawerBtnIcon, sideBar, main, colorPicker, content } from './Elements';
+import { toast } from 'materialize-css'
 import { Tool } from './structures';
 
 var isDrawerOpen = false;
@@ -11,6 +12,16 @@ export const handleSideBarDisplay = (e: Event): void => {
 
     sideBar.classList.toggle('close-drawer');
     main.classList.toggle('full-width');
+}
+
+export const notify = (message: string): void => {
+    toast({
+        html: message,
+        inDuration: 800,
+        outDuration: 800,
+        displayLength: 5000,
+        classes: 'rounded black-text grey lighten-5'
+    });
 }
 
 export const handleUsersToolChoice = (e: Event): void => {
@@ -47,7 +58,7 @@ export const processChoice = (tool: Tool): void => {
         }
 
         case 'delete': {
-            console.log('delete feature comming soon');
+            content.value = '';
         }
     }
 }
