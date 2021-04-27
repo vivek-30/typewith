@@ -44,6 +44,15 @@
                 <div id="type-pad">
                     <textarea id="content" name="text-area" class="white"></textarea>
                 </div>
+                <div id="saveWorkModal" class="modal">
+                    <div class="modal-content">
+                        <h4 class="center teal-text text-darken-1">Add Title</h4>
+                        <input type="text" placeholder="Provide Work Name">
+                    </div>
+                    <div class="modal-footer">
+                        <button id="finish-modal" class="btn-flat blue-text">Done</button>
+                    </div>
+                </div>
                 <div id="toolbar" class="left">
                     <div class="fixed-action-btn">
                         <button class="btn-floating btn-large teal" id="toolbar-btn">
@@ -51,20 +60,20 @@
                         </button>
                         <ul id="tools">
                             <li><a class="btn-floating red tooltipped" data-tooltip="Adjust Font">
-                                <i class="material-icons">text_format</i>
+                                <i class="material-icons" name="text_fomat">text_format</i>
                             </a></li>
                             <li><a class="btn-floating purple tooltipped" data-tooltip="Font Color">
                                 <input type="color" id="color-picker">
-                                <i class="material-icons">color_lens</i>
+                                <i class="material-icons" name="color_lens">color_lens</i>
                             </a></li>
                             <li><a class="btn-floating pink tooltipped" data-tooltip="Clear Work">
-                                <i class="material-icons">delete</i>
+                                <i class="material-icons" name="delete">delete</i>
                             </a></li>
                             <li><a class="btn-floating green tooltipped" data-tooltip="Save Work">
-                                <i class="material-icons">save</i>
+                                <i class="material-icons" name="save">save</i>
                             </a></li>
                             <li><a class="btn-floating blue tooltipped" data-tooltip="New Work">
-                                <i class="material-icons">add</i>
+                                <i class="material-icons" name="add">add</i>
                             </a></li>
                         </ul>
                     </div>
