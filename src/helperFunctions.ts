@@ -66,6 +66,9 @@ export const processChoice = (tool: Tool): void => {
 
         case 'delete': {
             content.value = '';
+            if(localStorage.getItem('work')) {
+                localStorage.setItem('work', '');
+            }
         }
     }
 }
