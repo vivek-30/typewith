@@ -1,8 +1,11 @@
 import { FloatingActionButton, Tooltip } from 'materialize-css';
-import { toolBarButton, toolTipps, drawerBtn, tools } from './Elements';
+import { toolBarButton, toolTipps, drawerBtn, tools, content } from './Elements';
 import { handleSideBarDisplay, handleUsersToolChoice } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
+
+const work = localStorage.getItem('work') || '';
+content.value = work;
 
 FloatingActionButton.init(toolBarButton, {
     direction: 'left',

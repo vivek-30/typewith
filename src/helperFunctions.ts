@@ -38,7 +38,14 @@ export const processChoice = (tool: Tool): void => {
         }
 
         case 'save': {
-            console.log('save feature comming soon');
+            const data = content.value.trim();
+            if(data === '') {
+                notify('Please Add Some Work To Save.');
+                return;
+            }
+
+            localStorage.setItem('work', data);
+            notify('Work Saved Successfully.')
             break;
         }
 
