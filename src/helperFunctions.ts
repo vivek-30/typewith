@@ -22,17 +22,17 @@ export const handleUsersToolChoice = (e: Event): void => {
 export const processChoice = (tool: Tool): void => {
     switch(tool) {
         case 'add': {
-            console.log('adding feature soon');
+            console.log('adding feature comming soon');
             break;
         }
 
         case 'save': {
-            console.log('save feature soon');
+            console.log('save feature comming soon');
             break;
         }
 
         case 'text_format': {
-            console.log('text_format feature soon');
+            console.log('text_format feature comming soon');
             break;
         }
 
@@ -45,7 +45,9 @@ export const processChoice = (tool: Tool): void => {
             });
             break;
         }
+
+        case 'delete': {
+            console.log('delete feature comming soon');
+        }
     }
 }
-
-

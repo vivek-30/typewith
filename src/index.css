@@ -24,16 +24,12 @@ body {
     padding: 1rem;
 }
 
-.setting {
-    margin: 1rem;
-}
-
-.setting label i {
-    margin: 7px;
-}
-
 #type-pad textarea {
     padding: 10px;
+}
+
+#tools li {
+    margin: 0.5rem 1.5rem !important;
 }
 
 #toolbar {
@@ -42,6 +38,14 @@ body {
 
 #color-picker {
     display: none;
+}
+
+.setting {
+    margin: 1rem;
+}
+
+.setting label i {
+    margin: 7px;
 }
 
 /* Drawer transition */
