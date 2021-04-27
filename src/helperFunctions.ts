@@ -1,8 +1,14 @@
-import { drawerBtnIcon, sideBar, main, colorPicker, content } from './Elements';
+import { 
+    drawerBtnIcon, sideBar, main, 
+    colorPicker, content, modalButton, 
+    modalValue
+} from './Elements';
 import { toast } from 'materialize-css'
 import { Tool } from './structures';
+import { modalInstance } from './index';
 
 var isDrawerOpen = false;
+var workTitle = '';
 
 export const handleSideBarDisplay = (e: Event): void => {
     let icon: 'chevron_left' | 'chevron_right';
@@ -26,26 +32,42 @@ export const notify = (message: string): void => {
 
 export const handleUsersToolChoice = (e: Event): void => {
     const item =  e.target as HTMLElement;
-    const toolName = item.innerText as Tool;
+    const toolName = item.getAttribute('name') as Tool;
     processChoice(toolName);
 }
 
 export const processChoice = (tool: Tool): void => {
     switch(tool) {
         case 'add': {
-            console.log('adding feature comming soon');
+            modalInstance?.open();
+            modalButton.addEventListener('click', (): void => {
+                workTitle = modalValue.value.trim();
+                if(workTitle === '') 
+                    notify('Please Enter a valid Title');
+                else if (localStorage.getItem(workTitle))
+                    notify('Work Title Already Exists.');
+                else 
+                    modalInstance?.close();
+            });
             break;
         }
 
         case 'save': {
-            const data = content.value.trim();
-            if(data === '') {
+            const work = content.value.trim();
+            if(work === '') {
                 notify('Please Add Some Work To Save.');
-                return;
+            }
+            else if(workTitle === '') {
+                notify('Please Provide Work Title To Save.');
+                const addButton = document.querySelector('#tools li a i[name="add"]') as HTMLElement;
+                addButton.click();
+            }
+            else {
+                localStorage.setItem(workTitle, work);
+                notify('Work Saved Successfully.');
+                workTitle = '';
             }
 
-            localStorage.setItem('work', data);
-            notify('Work Saved Successfully.')
             break;
         }
 
