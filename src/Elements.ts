@@ -1,4 +1,7 @@
 export const toolBarButton = document.querySelector('.fixed-action-btn') as HTMLDivElement;
+export const modal = document.querySelector('.modal') as HTMLDivElement;
+export const modalValue = document.querySelector('.modal-content input') as HTMLInputElement;
+export const modalButton = document.querySelector('.modal-footer button') as HTMLButtonElement;
 export const toolTipps = document.querySelectorAll('.tooltipped')!;
 export const drawerBtn = document.getElementById('drawer-btn') as HTMLButtonElement;
 export const toolBarBtn = document.getElementById('toolbar-btn') as HTMLButtonElement;

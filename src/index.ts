@@ -1,5 +1,5 @@
-import { FloatingActionButton, Tooltip } from 'materialize-css';
-import { toolBarButton, toolTipps, drawerBtn, tools, content } from './Elements';
+import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
+import { toolBarButton, toolTipps, drawerBtn, tools, content, modal } from './Elements';
 import { handleSideBarDisplay, handleUsersToolChoice } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
@@ -19,6 +19,11 @@ Tooltip.init(toolTipps, {
     inDuration: 300,
     outDuration: 0,
     margin: 10
+});
+
+export const modalInstance = Modal.init(modal, {
+    dismissible: true,
+    opacity: 0.6
 });
 
 drawerBtn.addEventListener('click', handleSideBarDisplay);
