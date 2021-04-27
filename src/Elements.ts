@@ -1,4 +1,5 @@
-export const ToolBarButton = document.querySelector('.fixed-action-btn') as HTMLDivElement;
+export const toolBarButton = document.querySelector('.fixed-action-btn') as HTMLDivElement;
+export const toolTipps = document.querySelectorAll('.tooltipped')!;
 export const drawerBtn = document.getElementById('drawer-btn') as HTMLButtonElement;
 export const toolBarBtn = document.getElementById('toolbar-btn') as HTMLButtonElement;
 export const colorPicker = document.getElementById('color-picker') as HTMLInputElement;
