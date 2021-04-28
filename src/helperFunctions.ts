@@ -4,14 +4,15 @@ import {
     modalValue
 } from './Elements';
 import { toast } from 'materialize-css'
-import { Tool } from './structures';
+import { Tool, DrawerIconType } from './structures';
 import { modalInstance } from './index';
 
 var isDrawerOpen = false;
 var workTitle = '';
+var presentContent = '';
 
 export const handleSideBarDisplay = (e: Event): void => {
-    let icon: 'chevron_left' | 'chevron_right';
+    let icon: DrawerIconType;
     icon = isDrawerOpen ? 'chevron_left' : 'chevron_right';
     drawerBtnIcon.innerText = icon;
     isDrawerOpen = !isDrawerOpen;
@@ -40,11 +41,12 @@ export const processChoice = (tool: Tool): void => {
     switch(tool) {
         case 'add': {
             modalInstance?.open();
+            modalValue.focus();
             modalButton.addEventListener('click', (): void => {
                 workTitle = modalValue.value.trim();
                 if(workTitle === '') 
                     notify('Please Enter a valid Title');
-                else if (localStorage.getItem(workTitle))
+                else if(localStorage.getItem(workTitle))
                     notify('Work Title Already Exists.');
                 else 
                     modalInstance?.close();
@@ -64,10 +66,29 @@ export const processChoice = (tool: Tool): void => {
             }
             else {
                 localStorage.setItem(workTitle, work);
+                localStorage.setItem('[[//work//]]', work);
                 notify('Work Saved Successfully.');
                 workTitle = '';
             }
+            break;
+        }
 
+        case 'folder_open': {
+
+            modalInstance?.open();
+            modalValue.focus();
+            modalButton.addEventListener('click', (): void => {
+                workTitle = modalValue.value.trim();
+                if(workTitle === '') 
+                    notify('Please Enter a valid Title');
+                else 
+                    modalInstance?.close();
+
+                if(workTitle !== '') {
+                    presentContent = content.value;
+                    content.value = localStorage.getItem(workTitle) || '';
+                }
+            });
             break;
         }
 

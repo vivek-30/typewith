@@ -4,7 +4,7 @@ import { handleSideBarDisplay, handleUsersToolChoice } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
 
-const work = localStorage.getItem('work') || '';
+const work = localStorage.getItem('[[//work//]]') || '';
 content.value = work;
 
 FloatingActionButton.init(toolBarButton, {
