@@ -1,93 +1,95 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="desciption" content="A simple collaborative Text-Editor created with TypeScript and WebSocket">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="./bundle.js" defer></script>
-    <title>TypeWith</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="desciption" content="A simple collaborative Text-Editor created with TypeScript and WebSocket">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="./bundle.js" defer></script>
+  <title>TypeWith</title>
 </head>
 <body>
-    <div class="section">
-        <div class="row">
-            <div class="col s3 m3 l3" id="sideBar">
-                <button class="btn-floating blue-grey darken-1" id="drawer-btn">
-                    <i class="material-icons">chevron_right</i>
-                </button>
-                <div id="settings-tab">
-                    <div class="setting">
-                        <label>
-                            <input type="checkbox" id="share">
-                            <span>Share Your Work</span>
-                            <i class="material-icons">visibility</i>
-                        </label>
-                    </div>
-                    <div class="setting">
-                        <label>
-                            <input type="checkbox" id="read-only">
-                            <span>Make Your Work ReadOnly</span>
-                            <i class="material-icons">pan_tool</i>
-                        </label>
-                    </div>
-                </div>
-                <div id="dashboard">
-                    <p class="notification">No New Notifications.</p>
-                </div>
-            </div>
-            <main class="col s9 m9 l9">
-                <nav>
-                    <div class="nav-wrapper blue-grey lighten-2">
-                        <span id="title" class="brand-logo center">TypeWith</span>
-                    </div>
-                </nav>
-                <div id="type-pad">
-                    <textarea id="content" name="text-area" class="white"></textarea>
-                </div>
-                <div id="saveWorkModal" class="modal">
-                    <div class="modal-content">
-                        <h4 class="center teal-text text-darken-1">Enter Title</h4>
-                        <input type="text" placeholder="Provide Work Name">
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn-flat blue-text">Done</button>
-                    </div>
-                </div>
-                <div id="user-prompt">
-                    <p class="center">...</p>
-                    <button id="prompt-accepted" class="btn-flat blue-text right">Yes</button>
-                    <button id="prompt-rejected" class="btn-flat red-text left">No</button>
-                </div>
-                <div id="toolbar" class="left">
-                    <div class="fixed-action-btn">
-                        <button class="btn-floating btn-large teal" id="toolbar-btn">
-                            <i class="large material-icons">mode_edit</i>
-                        </button>
-                        <ul id="tools">
-                            <li><a class="btn-floating red tooltipped" data-tooltip="Adjust Font">
-                                <i class="material-icons" name="text_fomat">text_format</i>
-                            </a></li>
-                            <li><a class="btn-floating purple tooltipped" data-tooltip="Font Color">
-                                <input type="color" id="color-picker">
-                                <i class="material-icons" name="color_lens">color_lens</i>
-                            </a></li>
-                            <li><a class="btn-floating cyan tooltipped" data-tooltip="Open Work">
-                                <i class="material-icons" name="folder_open">folder_open</i>
-                            </a></li>
-                            <li><a class="btn-floating pink tooltipped" data-tooltip="Clear Work">
-                                <i class="material-icons" name="delete">delete</i>
-                            </a></li>
-                            <li><a class="btn-floating green tooltipped" data-tooltip="Save Work">
-                                <i class="material-icons" name="save">save</i>
-                            </a></li>
-                            <li><a class="btn-floating blue tooltipped" data-tooltip="New Work">
-                                <i class="material-icons" name="add">add</i>
-                            </a></li>
-                        </ul>
-                    </div>
-                </div>
-            </main>
+  
+  <div class="section">
+    <div class="row">
+      <div class="col s3 m3 l3" id="sideBar">
+        <button class="btn-floating blue-grey darken-1" id="drawer-btn">
+          <i class="material-icons">chevron_right</i>
+        </button>
+        <div id="settings-tab">
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="share">
+              <span>Share Your Work</span>
+              <i class="material-icons">visibility</i>
+            </label>
+          </div>
+          <div class="setting">
+            <label>
+              <input type="checkbox" id="read-only">
+              <span>Make Your Work ReadOnly</span>
+              <i class="material-icons">pan_tool</i>
+            </label>
+          </div>
         </div>
+        <div id="dashboard">
+          <p class="notification">No New Notifications.</p>
+        </div>
+      </div>
+      <main class="col s9 m9 l9">
+        <nav>
+          <div class="nav-wrapper blue-grey lighten-2">
+            <span id="title" class="brand-logo center">TypeWith</span>
+          </div>
+        </nav>
+        <div id="type-pad">
+          <textarea id="content" name="text-area" class="white"></textarea>
+        </div>
+        <div id="saveWorkModal" class="modal">
+          <div class="modal-content">
+            <h4 class="center teal-text text-darken-1">Enter Title</h4>
+            <input type="text" placeholder="Provide Work Name">
+          </div>
+          <div class="modal-footer">
+            <button class="btn-flat blue-text">Done</button>
+          </div>
+        </div>
+        <div id="user-prompt">
+          <p class="center">...</p>
+          <button id="prompt-accepted" class="btn-flat blue-text right">Yes</button>
+          <button id="prompt-rejected" class="btn-flat red-text left">No</button>
+        </div>
+        <div id="toolbar" class="left">
+          <div class="fixed-action-btn">
+            <button class="btn-floating btn-large teal" id="toolbar-btn">
+              <i class="large material-icons">mode_edit</i>
+            </button>
+            <ul id="tools">
+              <li><a class="btn-floating red tooltipped" data-tooltip="Adjust Font">
+                  <i class="material-icons" name="text_fomat">text_format</i>
+                </a></li>
+              <li><a class="btn-floating purple tooltipped" data-tooltip="Font Color">
+                  <input type="color" id="color-picker">
+                  <i class="material-icons" name="color_lens">color_lens</i>
+                </a></li>
+              <li><a class="btn-floating cyan tooltipped" data-tooltip="Open Work">
+                  <i class="material-icons" name="folder_open">folder_open</i>
+                </a></li>
+              <li><a class="btn-floating pink tooltipped" data-tooltip="Clear Work">
+                  <i class="material-icons" name="delete">delete</i>
+                </a></li>
+              <li><a class="btn-floating green tooltipped" data-tooltip="Save Work">
+                  <i class="material-icons" name="save">save</i>
+                </a></li>
+              <li><a class="btn-floating blue tooltipped" data-tooltip="New Work">
+                  <i class="material-icons" name="add">add</i>
+                </a></li>
+            </ul>
+          </div>
+        </div>
+      </main>
     </div>
+  </div>
+
 </body>
 </html>
