@@ -9,8 +9,8 @@ import { modalInstance } from './index';
 import { Tool, DrawerIconType } from './Definitions';
 
 var isDrawerOpen = false;
-var workTitle = '';
-var presentContent = '';
+var workTitle = localStorage.getItem('current-work-title') || '';
+var isWorkSaved = localStorage.getItem(workTitle) ? true : false;
 
 export const handleSideBarDisplay = (): void => {
   let icon: DrawerIconType;
@@ -29,18 +29,14 @@ export const handleUsersToolChoice = (e: Event): void => {
 }
 
 export const processChoice = (tool: Tool): void => {
-
   switch (tool) {
+
     case 'add': {
       loadModal();
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
-        if (workTitle === '')
-          notify('Please Enter a valid Title');
-        else if (localStorage.getItem(workTitle))
-          notify('Work Title Already Exists.');
-        else
-          modalInstance?.close();
+        workTitle === '' ? notify('Please Enter a valid Title') : localStorage.getItem(workTitle) ?
+        notify('Work Title Already Exists.') : modalInstance?.close();
       });
       break;
     }
@@ -53,13 +49,16 @@ export const processChoice = (tool: Tool): void => {
       else if (workTitle === '') {
         notify('Please Provide Work Title To Save.');
         const addButton = document.querySelector('#tools li a i[name="add"]') as HTMLElement;
-        addButton.click();
+        addButton?.click();
       }
       else {
+
         localStorage.setItem(workTitle, work);
         localStorage.setItem('[[//work//]]', work);
+        localStorage.setItem('current-work-title', workTitle);
+
         notify('Work Saved Successfully.');
-        workTitle = '';
+        isWorkSaved = true;
       }
       break;
     }
@@ -68,14 +67,17 @@ export const processChoice = (tool: Tool): void => {
       loadModal();
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
-        if (workTitle === '')
-          notify('Please Enter a valid Title');
-        else
-          modalInstance?.close();
-
-        if (workTitle !== '') {
-          presentContent = content.value;
-          content.value = localStorage.getItem(workTitle) || '';
+        workTitle === '' ? notify('Please Enter A Valid Title') : modalInstance?.close();
+        if (localStorage.getItem(workTitle)) {
+          if(!isWorkSaved && content.value.trim() !== '') {
+            notify('Please Save Your Work First');
+          }
+          else {
+            content.value = localStorage.getItem(workTitle) || '';
+          }
+        }
+        else if(workTitle !== '') {
+          notify(`No Work Found With Title ${workTitle}`);
         }
       });
       break;
@@ -97,7 +99,14 @@ export const processChoice = (tool: Tool): void => {
     }
 
     case 'delete': {
-      displayPrompt('Delete this work from saved space as well ?');
+      if(content.value !== '') {
+        displayPrompt('Delete this work from saved space as well ?', workTitle);
+        isWorkSaved = false;
+        workTitle = '';
+      }
+      else {
+        notify('No Work To Delete');
+      }
     }
   }
 }
