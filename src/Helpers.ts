@@ -6,13 +6,16 @@ import {
 import { toast } from 'materialize-css';
 import { modalInstance } from './index';
 
+var workTitle: string;
+
 export const loadModal = (): void => {
   modalInstance?.open();
   modalValue.value = '';
   modalValue.focus();
 }
 
-export const displayPrompt = (message: string): void => {
+export const displayPrompt = (message: string, usersWorkTitle: string): void => {
+  workTitle = usersWorkTitle;
   userPromptTitle.innerText = message;
   userPrompt.style.display = 'block';
 }
@@ -24,9 +27,9 @@ export const handlePromptRejectance = (): void => {
 
 export const handlePromptAcceptance = (): void => {
   content.value = '';
-  if (localStorage.getItem('[[//work//]]')) {
-    localStorage.setItem('[[//work//]]', '');
-  }
+  localStorage.removeItem('current-work-title');
+  localStorage.removeItem('[[//work//]]');
+  localStorage.removeItem(workTitle);
   userPrompt.style.display = 'none';
 }
 
