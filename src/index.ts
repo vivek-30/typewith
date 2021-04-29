@@ -4,14 +4,12 @@ import {
     tools, content, modal
 } from './Elements';
 
-import { 
-    handleSideBarDisplay, handleUsersToolChoice,
-    handlePromptAcceptance, handlePromptRejectance
-} from './helperFunctions';
-
+import { handleSideBarDisplay, handleUsersToolChoice } from './Executors';
+import { handlePromptAcceptance, handlePromptRejectance } from './Helpers';
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
+
 import 'materialize-css/dist/css/materialize.min.css';
-import './index.css';
+import './css/index.css';
 
 const work = localStorage.getItem('[[//work//]]') || '';
 content.value = work;

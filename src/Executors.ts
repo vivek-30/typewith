@@ -4,9 +4,13 @@ import {
     modalValue, userPrompt, userPromptTitle
 } from './Elements';
 
-import { toast } from 'materialize-css'
-import { Tool, DrawerIconType } from './structures';
+import { 
+    loadModal, displayPrompt, handlePromptAcceptance,
+    handlePromptRejectance, notify
+} from './Helpers';
+
 import { modalInstance } from './index';
+import { Tool, DrawerIconType } from './Definitions';
 
 var isDrawerOpen = false;
 var workTitle = '';
@@ -22,44 +26,10 @@ export const handleSideBarDisplay = (): void => {
     main.classList.toggle('full-width');
 }
 
-export const notify = (message: string): void => {
-    toast({
-        html: message,
-        inDuration: 800,
-        outDuration: 800,
-        displayLength: 5000,
-        classes: 'rounded black-text grey lighten-5'
-    });
-}
-
 export const handleUsersToolChoice = (e: Event): void => {
     const item =  e.target as HTMLElement;
     const toolName = item.getAttribute('name') as Tool;
     processChoice(toolName);
-}
-
-export const loadModal = (): void => {
-    modalInstance?.open();
-    modalValue.value = '';
-    modalValue.focus();
-}
-
-export const displayPrompt = (message: string): void => {
-    userPromptTitle.innerText = message;
-    userPrompt.style.display = 'block';
-}
-
-export const handlePromptRejectance = (): void => {
-    content.value = '';
-    userPrompt.style.display = 'none';
-}
-
-export const handlePromptAcceptance = (): void => {
-    content.value = '';
-    if(localStorage.getItem('[[//work//]]')) {
-        localStorage.setItem('[[//work//]]', '');
-    }
-    userPrompt.style.display = 'none';
 }
 
 export const processChoice = (tool: Tool): void => {
