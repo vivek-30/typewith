@@ -40,6 +40,27 @@ body {
     display: none;
 }
 
+#user-prompt {
+    display: none;
+    background: #fafafa;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    position: absolute;
+    min-width: 30em;
+    padding: 1rem;
+    top: 5%;
+    right: 2%;
+    box-shadow: 2px 2px 8px rgb(0, 0, 0, 0.2);
+}
+
+#user-prompt p {
+    font-size: 1.35rem;
+}
+
+#user-prompt button {
+    font-size: 1.1rem;   
+}
+
 .setting {
     margin: 1rem;
 }
