@@ -1,6 +1,15 @@
+import { 
+    toolBarButton, toolTipps, drawerBtn,
+    promptRejected, promptAccepted,
+    tools, content, modal
+} from './Elements';
+
+import { 
+    handleSideBarDisplay, handleUsersToolChoice,
+    handlePromptAcceptance, handlePromptRejectance
+} from './helperFunctions';
+
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
-import { toolBarButton, toolTipps, drawerBtn, tools, content, modal } from './Elements';
-import { handleSideBarDisplay, handleUsersToolChoice } from './helperFunctions';
 import 'materialize-css/dist/css/materialize.min.css';
 import './index.css';
 
@@ -28,3 +37,5 @@ export const modalInstance = Modal.init(modal, {
 
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
+promptAccepted.addEventListener('click' ,handlePromptAcceptance);
+promptRejected.addEventListener('click' ,handlePromptRejectance);

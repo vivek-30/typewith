@@ -1,8 +1,9 @@
 import { 
     drawerBtnIcon, sideBar, main, 
     colorPicker, content, modalButton, 
-    modalValue
+    modalValue, userPrompt, userPromptTitle
 } from './Elements';
+
 import { toast } from 'materialize-css'
 import { Tool, DrawerIconType } from './structures';
 import { modalInstance } from './index';
@@ -11,7 +12,7 @@ var isDrawerOpen = false;
 var workTitle = '';
 var presentContent = '';
 
-export const handleSideBarDisplay = (e: Event): void => {
+export const handleSideBarDisplay = (): void => {
     let icon: DrawerIconType;
     icon = isDrawerOpen ? 'chevron_left' : 'chevron_right';
     drawerBtnIcon.innerText = icon;
@@ -37,11 +38,35 @@ export const handleUsersToolChoice = (e: Event): void => {
     processChoice(toolName);
 }
 
+export const loadModal = (): void => {
+    modalInstance?.open();
+    modalValue.value = '';
+    modalValue.focus();
+}
+
+export const displayPrompt = (message: string): void => {
+    userPromptTitle.innerText = message;
+    userPrompt.style.display = 'block';
+}
+
+export const handlePromptRejectance = (): void => {
+    content.value = '';
+    userPrompt.style.display = 'none';
+}
+
+export const handlePromptAcceptance = (): void => {
+    content.value = '';
+    if(localStorage.getItem('[[//work//]]')) {
+        localStorage.setItem('[[//work//]]', '');
+    }
+    userPrompt.style.display = 'none';
+}
+
 export const processChoice = (tool: Tool): void => {
+    
     switch(tool) {
         case 'add': {
-            modalInstance?.open();
-            modalValue.focus();
+            loadModal();
             modalButton.addEventListener('click', (): void => {
                 workTitle = modalValue.value.trim();
                 if(workTitle === '') 
@@ -74,9 +99,7 @@ export const processChoice = (tool: Tool): void => {
         }
 
         case 'folder_open': {
-
-            modalInstance?.open();
-            modalValue.focus();
+            loadModal();
             modalButton.addEventListener('click', (): void => {
                 workTitle = modalValue.value.trim();
                 if(workTitle === '') 
@@ -108,10 +131,7 @@ export const processChoice = (tool: Tool): void => {
         }
 
         case 'delete': {
-            content.value = '';
-            if(localStorage.getItem('work')) {
-                localStorage.setItem('work', '');
-            }
+            displayPrompt('Delete this work from saved space as well ?');
         }
     }
 }
