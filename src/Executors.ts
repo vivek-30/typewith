@@ -111,11 +111,6 @@ export const processChoice = (tool: Tool): void => {
       break;
     }
 
-    case 'text_format': {
-      console.log('text_format feature comming soon');
-      break;
-    }
-
     case 'color_lens': {
       colorPicker.click();
       colorPicker.addEventListener('input', (e: Event): void => {
