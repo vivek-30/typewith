@@ -42,3 +42,12 @@ export const notify = (message: string): void => {
     classes: 'rounded black-text grey lighten-5'
   });
 }
+
+export const tabIndent = (e: KeyboardEvent): void => {
+  if (e.key == 'Tab') {
+    e.preventDefault();
+    let start = content.selectionStart;
+    content.value += '\t';
+    content.selectionStart = content.selectionEnd = start + 1;
+  }
+}

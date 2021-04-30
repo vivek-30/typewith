@@ -5,7 +5,7 @@ import {
 } from './Elements';
 
 import { handleSideBarDisplay, handleUsersToolChoice } from './Executors';
-import { handlePromptAcceptance, handlePromptRejectance } from './Helpers';
+import { handlePromptAcceptance, handlePromptRejectance, tabIndent } from './Helpers';
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
 
 import 'materialize-css/dist/css/materialize.min.css';
@@ -33,6 +33,7 @@ export const modalInstance = Modal.init(modal, {
   opacity: 0.6
 });
 
+content.addEventListener('keydown', tabIndent);
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
 promptAccepted.addEventListener('click', handlePromptAcceptance);
