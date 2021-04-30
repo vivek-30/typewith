@@ -4,13 +4,18 @@ import {
   modalValue
 } from './Elements';
 
-import { loadModal, displayPrompt, notify } from './Helpers';
+import {
+  loadModal, displayPrompt, notify,
+  tabIndent
+} from './Helpers';
+
 import { modalInstance } from './index';
 import { Tool, DrawerIconType } from './Definitions';
 
 var isDrawerOpen = false;
 var workTitle = localStorage.getItem('current-work-title') || '';
 var isWorkSaved = localStorage.getItem(workTitle) ? true : false;
+var isCustomTitle = false;
 
 export const handleSideBarDisplay = (): void => {
   let icon: DrawerIconType;
@@ -28,6 +33,13 @@ export const handleUsersToolChoice = (e: Event): void => {
   processChoice(toolName);
 }
 
+export const handleContentChange = (e: KeyboardEvent) => {
+  isWorkSaved = false;
+  if(e.key == 'Tab') {
+    tabIndent(e);
+  }
+}
+
 export const processChoice = (tool: Tool): void => {
   switch (tool) {
 
@@ -35,14 +47,25 @@ export const processChoice = (tool: Tool): void => {
       loadModal();
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
-        workTitle === '' ? notify('Please Enter a valid Title') : localStorage.getItem(workTitle) ?
-        notify('Work Title Already Exists.') : modalInstance?.close();
+        if(workTitle === '') {
+          notify('Please Enter a valid Title');
+        }
+        else if(localStorage.getItem(workTitle)) {
+          notify('Work Title Already Exists.');
+        }
+        else {
+          isCustomTitle = true;
+          modalInstance?.close();
+        }
       });
       break;
     }
 
     case 'save': {
       const work = content.value.trim();
+      if (!isCustomTitle) {
+        workTitle = localStorage.getItem('current-work-title') || '';
+      }
       if (work === '') {
         notify('Please Add Some Work To Save.');
       }
@@ -73,7 +96,10 @@ export const processChoice = (tool: Tool): void => {
             notify('Please Save Your Work First');
           }
           else {
-            content.value = localStorage.getItem(workTitle) || '';
+            let savedWork = localStorage.getItem(workTitle) || '';
+            content.value = savedWork;
+            localStorage.setItem('current-work-title', workTitle);
+            localStorage.setItem('[[//work//]]', savedWork);
           }
         }
         else if(workTitle !== '') {
@@ -102,7 +128,10 @@ export const processChoice = (tool: Tool): void => {
       if(content.value !== '') {
         displayPrompt('Delete this work from saved space as well ?', workTitle);
         isWorkSaved = false;
+        isCustomTitle = false;
         workTitle = '';
+        localStorage.removeItem('[[//work//]]');
+        localStorage.removeItem('current-work-title');
       }
       else {
         notify('No Work To Delete');

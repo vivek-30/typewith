@@ -44,10 +44,8 @@ export const notify = (message: string): void => {
 }
 
 export const tabIndent = (e: KeyboardEvent): void => {
-  if (e.key == 'Tab') {
-    e.preventDefault();
-    let start = content.selectionStart;
-    content.value += '\t';
-    content.selectionStart = content.selectionEnd = start + 1;
-  }
+  e.preventDefault();
+  let start = content.selectionStart;
+  content.value += '\t';
+  content.selectionStart = content.selectionEnd = start + 1;
 }
