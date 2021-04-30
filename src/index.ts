@@ -15,9 +15,6 @@ import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
 import './css/index.css';
 
-const work = localStorage.getItem('[[//work//]]') || '';
-content.value = work;
-
 FloatingActionButton.init(toolBarButton, {
   direction: 'left',
   hoverEnabled: false

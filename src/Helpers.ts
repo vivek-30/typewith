@@ -3,10 +3,12 @@ import {
   content
 } from './Elements';
 
+import { WorkType } from './Definitions';
 import { toast } from 'materialize-css';
 import { modalInstance } from './index';
 
 var workTitle: string;
+var oldWorks: WorkType[] = [];
 
 export const loadModal = (): void => {
   modalInstance?.open();
@@ -21,15 +23,14 @@ export const displayPrompt = (message: string, usersWorkTitle: string): void => 
 }
 
 export const handlePromptRejectance = (): void => {
-  content.value = '';
   userPrompt.style.display = 'none';
 }
 
 export const handlePromptAcceptance = (): void => {
-  content.value = '';
-  localStorage.removeItem('current-work-title');
-  localStorage.removeItem('[[//work//]]');
-  localStorage.removeItem(workTitle);
+  let oldSavedWorks = localStorage.getItem('TypeWithWorks');
+  oldWorks = oldSavedWorks ? JSON.parse(oldSavedWorks) as WorkType[] : oldWorks;
+  let updatedWorks = oldWorks.filter(({title}) => title !== workTitle);
+  localStorage.setItem('TypeWithWorks', JSON.stringify(updatedWorks));
   userPrompt.style.display = 'none';
 }
 

@@ -10,18 +10,20 @@ import {
 } from './Helpers';
 
 import { modalInstance } from './index';
-import { Tool, DrawerIconType } from './Definitions';
+import { Tool, DrawerIconType, WorkType } from './Definitions';
 
-var isDrawerOpen = false;
-var workTitle = localStorage.getItem('current-work-title') || '';
-var isWorkSaved = localStorage.getItem(workTitle) ? true : false;
-var isCustomTitle = false;
+var isDrawerClose = false;
+var fontColor = '#000';
+var workTitle = '';
+var isWorkSaved = true;
+
+var savedWorks: WorkType[] = [];
 
 export const handleSideBarDisplay = (): void => {
   let icon: DrawerIconType;
-  icon = isDrawerOpen ? 'chevron_left' : 'chevron_right';
+  icon = isDrawerClose ? 'chevron_left' : 'chevron_right';
   drawerBtnIcon.innerText = icon;
-  isDrawerOpen = !isDrawerOpen;
+  isDrawerClose = !isDrawerClose;
 
   sideBar.classList.toggle('close-drawer');
   main.classList.toggle('full-width');
@@ -47,25 +49,21 @@ export const processChoice = (tool: Tool): void => {
       loadModal();
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
-        if(workTitle === '') {
-          notify('Please Enter a valid Title');
+        let checkWork = localStorage.getItem('TypeWithWorks');
+        let isExists = false;
+        if (checkWork) {
+          let parsedWork = JSON.parse(checkWork) as WorkType[];
+          let result = parsedWork.find(({ title }) => title === workTitle);
+          isExists = result ? true : false;
         }
-        else if(localStorage.getItem(workTitle)) {
-          notify('Work Title Already Exists.');
-        }
-        else {
-          isCustomTitle = true;
-          modalInstance?.close();
-        }
+        workTitle === '' ? notify('Please Enter A Valid Title') : isExists ?
+        notify('Work Title Already Exists.') : modalInstance?.close();
       });
       break;
     }
 
     case 'save': {
       const work = content.value.trim();
-      if (!isCustomTitle) {
-        workTitle = localStorage.getItem('current-work-title') || '';
-      }
       if (work === '') {
         notify('Please Add Some Work To Save.');
       }
@@ -76,9 +74,16 @@ export const processChoice = (tool: Tool): void => {
       }
       else {
 
-        localStorage.setItem(workTitle, work);
-        localStorage.setItem('[[//work//]]', work);
-        localStorage.setItem('current-work-title', workTitle);
+        let oldWorks = localStorage.getItem('TypeWithWorks');
+        savedWorks = oldWorks ? JSON.parse(oldWorks) as WorkType[] : savedWorks;
+        let currentWork = {
+          title: workTitle,
+          content: work,
+          color: fontColor
+        }
+        savedWorks = savedWorks.filter(({ title }) => title !== workTitle);
+        savedWorks = [ ...savedWorks, currentWork ];
+        localStorage.setItem('TypeWithWorks', JSON.stringify(savedWorks));
 
         notify('Work Saved Successfully.');
         isWorkSaved = true;
@@ -91,18 +96,15 @@ export const processChoice = (tool: Tool): void => {
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
         workTitle === '' ? notify('Please Enter A Valid Title') : modalInstance?.close();
-        if (localStorage.getItem(workTitle)) {
-          if(!isWorkSaved && content.value.trim() !== '') {
-            notify('Please Save Your Work First');
-          }
-          else {
-            let savedWork = localStorage.getItem(workTitle) || '';
-            content.value = savedWork;
-            localStorage.setItem('current-work-title', workTitle);
-            localStorage.setItem('[[//work//]]', savedWork);
-          }
+        let oldWorks = localStorage.getItem('TypeWithWorks');
+        if (oldWorks && workTitle !== '') {
+            let localWorks = JSON.parse(oldWorks) as WorkType[];
+            let searchedWork = localWorks.find(({ title }) => title === workTitle);
+            let searchedWorkContent = searchedWork ? searchedWork.content : '';
+            content.value = searchedWorkContent;
+            content.style.color = searchedWork ? searchedWork.color : fontColor;
         }
-        else if(workTitle !== '') {
+        else if (workTitle !== '') {
           notify(`No Work Found With Title ${workTitle}`);
         }
       });
@@ -120,18 +122,19 @@ export const processChoice = (tool: Tool): void => {
         const picker = e.target as HTMLInputElement;
         const color = picker.value;
         content.style.color = color;
+        fontColor = color;
       });
       break;
     }
 
     case 'delete': {
-      if(content.value !== '') {
+      if (content.value !== '') {
         displayPrompt('Delete this work from saved space as well ?', workTitle);
-        isWorkSaved = false;
-        isCustomTitle = false;
+        content.value = '';
         workTitle = '';
-        localStorage.removeItem('[[//work//]]');
-        localStorage.removeItem('current-work-title');
+        fontColor = '#000';
+        isWorkSaved = false;
+        content.style.color = fontColor;
       }
       else {
         notify('No Work To Delete');
