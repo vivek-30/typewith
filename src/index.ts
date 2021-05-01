@@ -9,9 +9,18 @@ import {
   handleContentChange
 } from './Executors';
 
-import { handlePromptAcceptance, handlePromptRejectance } from './Helpers';
+import {
+  handlePromptAcceptance, handlePromptRejectance,
+  setWork
+} from './Helpers';
+
+import { WorkType } from './Definitions';
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
 import './sass/index.scss';
+
+let recentWorks = localStorage.getItem('TypeWithWorks');
+let savedWorks: WorkType[] = recentWorks ? JSON.parse(recentWorks) : [];
+setWork(savedWorks);
 
 FloatingActionButton.init(toolBarButton, {
   direction: 'left',

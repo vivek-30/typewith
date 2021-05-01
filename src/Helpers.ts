@@ -1,6 +1,6 @@
 import {
   modalValue, userPrompt, userPromptTitle,
-  content
+  content, dashBoard
 } from './Elements';
 
 import { WorkType } from './Definitions';
@@ -22,6 +22,15 @@ export const displayPrompt = (message: string, usersWorkTitle: string): void => 
   userPrompt.style.display = 'block';
 }
 
+export const setWork = (savedWorks: WorkType[]) => {
+  if (savedWorks.length) {
+    dashBoard.innerHTML = '<hr>';
+    savedWorks.forEach(({ title }): void => {
+      dashBoard.innerHTML += `<p class="my-work center">${title}</p><hr>`;
+    });
+  }
+}
+
 export const handlePromptRejectance = (): void => {
   userPrompt.style.display = 'none';
 }
@@ -31,6 +40,7 @@ export const handlePromptAcceptance = (): void => {
   oldWorks = oldSavedWorks ? JSON.parse(oldSavedWorks) as WorkType[] : oldWorks;
   let updatedWorks = oldWorks.filter(({title}) => title !== workTitle);
   localStorage.setItem('TypeWithWorks', JSON.stringify(updatedWorks));
+  setWork(updatedWorks);
   userPrompt.style.display = 'none';
 }
 
