@@ -11,9 +11,7 @@ import {
 
 import { handlePromptAcceptance, handlePromptRejectance } from './Helpers';
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
-
-import 'materialize-css/dist/css/materialize.min.css';
-import './css/index.css';
+import './sass/index.scss';
 
 FloatingActionButton.init(toolBarButton, {
   direction: 'left',

@@ -1,0 +1,104 @@
+// Imports
+@import 'materialize-css/sass/materialize.scss';
+
+// Variables
+$bgColor: #eee;
+$contentStyle: Verdana, Geneva, Tahoma, sans-serif;
+$normalPadding: 1rem;
+
+
+// Styles
+body {
+  background: $bgColor;
+}
+
+#content {
+  height: 78vh;
+  resize: none;
+  font-size: 18px;
+  font-family: $contentStyle;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#drawer-btn {
+  position: absolute;
+  top: 40%;
+  bottom: 50%;
+  left: 24.5%;
+}
+
+#settings-tab, #dashboard {
+  padding: $normalPadding;
+}
+
+#type-pad {
+  textarea {
+    padding: 10px;
+  }
+}
+
+#tools {
+  li {
+    margin: 0.5rem 1.2rem !important;
+  }
+}
+
+#toolbar {
+  text-align: left !important;
+}
+
+#color-picker {
+  display: none;
+}
+
+#user-prompt {
+  display: none;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  position: absolute;
+  min-width: 30em;
+  padding: $normalPadding;
+  top: 5%;
+  right: 2%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+#user-prompt {
+  p {
+    font-size: 1.35rem;
+  }
+
+  button {
+    font-size: 1.1rem;
+  }
+}
+
+.setting {
+  margin: 1rem;
+
+  label {
+    i {
+      margin: 7px;
+    }
+  }
+}
+
+/* Drawer transition */
+.close-drawer {
+  div {
+    display: none !important;
+  }
+
+  #drawer-btn {
+    left: 0% !important;
+  }
+}
+
+.full-width {
+  width: 99% !important;
+  margin: 5px auto !important;
+}
