@@ -1,6 +1,6 @@
 import {
   modalValue, userPrompt, userPromptTitle,
-  content, dashBoard
+  content, dashBoardItem
 } from './Elements';
 
 import { WorkType } from './Definitions';
@@ -24,9 +24,12 @@ export const displayPrompt = (message: string, usersWorkTitle: string): void => 
 
 export const setWork = (savedWorks: WorkType[]) => {
   if (savedWorks.length) {
-    dashBoard.innerHTML = '<hr>';
+    dashBoardItem.innerHTML = '';
+    let isGrey = true;
     savedWorks.forEach(({ title }): void => {
-      dashBoard.innerHTML += `<p class="my-work center">${title}</p><hr>`;
+      dashBoardItem.innerHTML += `<li class="collection-item grey lighten-${isGrey ? '5' : '4'}
+      my-work">${title}</li>`;
+      isGrey = !isGrey;
     });
   }
 }

@@ -6,7 +6,7 @@ import {
 
 import {
   loadModal, displayPrompt, notify,
-  tabIndent
+  tabIndent, setWork
 } from './Helpers';
 
 import { modalInstance } from './index';
@@ -84,6 +84,7 @@ export const processChoice = (tool: Tool): void => {
         savedWorks = savedWorks.filter(({ title }) => title !== workTitle);
         savedWorks = [ ...savedWorks, currentWork ];
         localStorage.setItem('TypeWithWorks', JSON.stringify(savedWorks));
+        setWork(savedWorks);
 
         notify('Work Saved Successfully.');
         isWorkSaved = true;
