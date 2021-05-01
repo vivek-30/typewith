@@ -1,13 +1,12 @@
-// Imports
+// Imports.
 @import 'materialize-css/sass/materialize.scss';
 
-// Variables
+// Variables.
 $bgColor: #eee;
 $contentStyle: Verdana, Geneva, Tahoma, sans-serif;
 $normalPadding: 1rem;
 
-
-// Styles
+// Styles.
 body {
   background: $bgColor;
 }
@@ -30,7 +29,8 @@ body {
   left: 24.5%;
 }
 
-#settings-tab, #dashboard {
+#config-zone {
+  // background: #c0cada;
   padding: $normalPadding;
 }
 
@@ -77,7 +77,22 @@ body {
   }
 }
 
-.setting {
+#dashboard {
+  padding: ($normalPadding/2) $normalPadding;
+
+  ul.collection {
+    background: $bgColor !important;
+    border: 0px !important;
+  }
+
+  .my-work {
+    margin: 5px 0px !important;
+    border-radius: 12px !important;
+    box-shadow: 1px 1px 5px rgba(187, 180, 180, 0.2) !important;
+  }
+}
+
+.config {
   margin: 1rem;
 
   label {
@@ -87,7 +102,7 @@ body {
   }
 }
 
-/* Drawer transition */
+// Drawer transition.
 .close-drawer {
   div {
     display: none !important;
