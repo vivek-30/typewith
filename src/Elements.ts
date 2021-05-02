@@ -4,6 +4,7 @@ export const modalValue = document.querySelector('.modal-content input') as HTML
 export const modalButton = document.querySelector('.modal-footer button') as HTMLButtonElement;
 export const userPromptTitle = document.querySelector('#user-prompt p') as HTMLParagraphElement;
 export const toolTipps = document.querySelectorAll('.tooltipped')!;
+export const usersList = document.querySelectorAll('.sidenav')!;
 export const drawerBtn = document.getElementById('drawer-btn') as HTMLButtonElement;
 export const promptAccepted = document.getElementById('prompt-accepted') as HTMLButtonElement;
 export const promptRejected = document.getElementById('prompt-rejected') as HTMLButtonElement;

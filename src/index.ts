@@ -1,7 +1,7 @@
 import {
   toolBarButton, toolTipps, drawerBtn,
   promptRejected, promptAccepted,
-  tools, content, modal
+  tools, content, modal, usersList
 } from './Elements';
 
 import {
@@ -14,9 +14,13 @@ import {
   setWork
 } from './Helpers';
 
+import {
+  FloatingActionButton, Tooltip,
+  Modal, Sidenav
+} from 'materialize-css';
+
 import { socket } from './socket';
 import { WorkType } from './Definitions';
-import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
 import './sass/index.scss';
 
 let recentWorks = localStorage.getItem('TypeWithWorks');
@@ -40,6 +44,10 @@ Tooltip.init(toolTipps, {
 export const modalInstance = Modal.init(modal, {
   dismissible: true,
   opacity: 0.6
+});
+
+Sidenav.init(usersList, {
+  edge: 'right'
 });
 
 // Events For DOM Elements.
