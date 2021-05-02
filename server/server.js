@@ -18,6 +18,8 @@ const io = socket(server, {
   }
 });
 
+io.
+
 server.listen(PORT, () => {
   console.log(`Listening at port ${PORT}`);
 });
