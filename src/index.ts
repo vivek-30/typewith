@@ -14,6 +14,7 @@ import {
   setWork
 } from './Helpers';
 
+import { socket } from './socket';
 import { WorkType } from './Definitions';
 import { FloatingActionButton, Tooltip, Modal } from 'materialize-css';
 import './sass/index.scss';
@@ -41,8 +42,14 @@ export const modalInstance = Modal.init(modal, {
   opacity: 0.6
 });
 
-content.addEventListener('keydown', handleContentChange);
+// Events For DOM Elements.
+content.addEventListener('keyup', handleContentChange);
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
 promptAccepted.addEventListener('click', handlePromptAcceptance);
 promptRejected.addEventListener('click', handlePromptRejectance);
+
+// Socket Events.
+socket.on('writing', (data: string) => {
+  content.value = data;
+});

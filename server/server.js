@@ -19,7 +19,11 @@ const io = socket(server, {
 });
 
 io.on('connection', (socket) => {
-  console.log('New user connected with id', socket.id);
+
+  socket.on('writing', (content) => {
+    socket.broadcast.emit('writing', content);
+  });
+
 });
 
 server.listen(PORT, () => {

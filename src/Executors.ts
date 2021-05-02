@@ -9,6 +9,7 @@ import {
   tabIndent, setWork
 } from './Helpers';
 
+import { socket } from './socket';
 import { modalInstance } from './index';
 import { Tool, DrawerIconType, WorkType } from './Definitions';
 
@@ -40,6 +41,7 @@ export const handleContentChange = (e: KeyboardEvent) => {
   if(e.key == 'Tab') {
     tabIndent(e);
   }
+  socket.emit('writing', content.value);
 }
 
 export const processChoice = (tool: Tool): void => {
