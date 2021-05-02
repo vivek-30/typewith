@@ -17,6 +17,7 @@ var isDrawerClose = false;
 var fontColor = '#000';
 var workTitle = '';
 var isWorkSaved = true;
+var isOpening = false;
 
 var savedWorks: WorkType[] = [];
 
@@ -49,18 +50,20 @@ export const processChoice = (tool: Tool): void => {
 
     case 'add': {
       loadModal();
-      modalButton.addEventListener('click', (): void => {
-        workTitle = modalValue.value.trim();
-        let checkWork = localStorage.getItem('TypeWithWorks');
-        let isExists = false;
-        if (checkWork) {
-          let parsedWork = JSON.parse(checkWork) as WorkType[];
-          let result = parsedWork.find(({ title }) => title === workTitle);
-          isExists = result ? true : false;
-        }
-        workTitle === '' ? notify('Please Enter A Valid Title') : isExists ?
-        notify('Work Title Already Exists.') : modalInstance?.close();
-      });
+      if(!isOpening) {
+        modalButton.addEventListener('click', (): void => {
+          workTitle = modalValue.value.trim();
+          let checkWork = localStorage.getItem('TypeWithWorks');
+          let isExists = false;
+          if (checkWork) {
+            let parsedWork = JSON.parse(checkWork) as WorkType[];
+            let result = parsedWork.find(({ title }) => title === workTitle);
+            isExists = result ? true : false;
+          }
+          workTitle === '' ? notify('Please Enter A Valid Title') : isExists ?
+          notify('Work Title Already Exists.') : modalInstance?.close();
+        });
+      }
       break;
     }
 
@@ -96,6 +99,7 @@ export const processChoice = (tool: Tool): void => {
 
     case 'folder_open': {
       loadModal();
+      isOpening = true;
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
         workTitle === '' ? notify('Please Enter A Valid Title') : modalInstance?.close();
@@ -111,6 +115,7 @@ export const processChoice = (tool: Tool): void => {
           notify(`No Work Found With Title ${workTitle}`);
         }
       });
+      isOpening = false;
       break;
     }
 
