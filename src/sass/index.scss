@@ -79,6 +79,8 @@ body {
 
 #dashboard {
   padding: ($normalPadding/2) $normalPadding;
+  height: 65vh;
+  overflow: scroll;
 
   ul.collection {
     background: $bgColor !important;
@@ -88,6 +90,7 @@ body {
   .my-work {
     margin: 5px 0px !important;
     border-radius: 12px !important;
+    word-break: break-all;
     box-shadow: 1px 1px 5px rgba(187, 180, 180, 0.2) !important;
   }
 }
