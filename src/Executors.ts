@@ -6,7 +6,7 @@ import {
 
 import {
   loadModal, displayPrompt, notify,
-  tabIndent, setWork
+  tabIndent, setWork, setName
 } from './Helpers';
 
 import { socket } from './socket';
@@ -18,6 +18,12 @@ var fontColor = '#000';
 var workTitle = '';
 var isWorkSaved = true;
 var isOpening = false;
+var isNaming = true;
+
+setTimeout((): void => {
+  var myName = localStorage.getItem('MyTypeWithName') || '';
+  setName(myName);
+}, 1000);
 
 var savedWorks: WorkType[] = [];
 
@@ -49,8 +55,8 @@ export const processChoice = (tool: Tool): void => {
   switch (tool) {
 
     case 'add': {
-      loadModal();
-      if(!isOpening) {
+      loadModal('Enter Work Title.');
+      if(!isOpening && !isNaming) {
         modalButton.addEventListener('click', (): void => {
           workTitle = modalValue.value.trim();
           let checkWork = localStorage.getItem('TypeWithWorks');
@@ -98,7 +104,7 @@ export const processChoice = (tool: Tool): void => {
     }
 
     case 'folder_open': {
-      loadModal();
+      loadModal('Enter Work Name.');
       isOpening = true;
       modalButton.addEventListener('click', (): void => {
         workTitle = modalValue.value.trim();
@@ -133,7 +139,6 @@ export const processChoice = (tool: Tool): void => {
     case 'delete': {
       if (content.value !== '') {
         displayPrompt('Delete this work from saved space as well ?', workTitle);
-        content.value = '';
         workTitle = '';
         fontColor = '#000';
         isWorkSaved = false;
