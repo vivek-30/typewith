@@ -1,5 +1,6 @@
 export const toolBarButton = document.querySelector('.fixed-action-btn') as HTMLDivElement;
 export const modal = document.querySelector('.modal') as HTMLDivElement;
+export const modalTitle = document.querySelector('.modal-content h4') as HTMLHeadingElement;
 export const modalValue = document.querySelector('.modal-content input') as HTMLInputElement;
 export const modalButton = document.querySelector('.modal-footer button') as HTMLButtonElement;
 export const userPromptTitle = document.querySelector('#user-prompt p') as HTMLParagraphElement;
@@ -8,6 +9,7 @@ export const usersList = document.querySelectorAll('.sidenav')!;
 export const drawerBtn = document.getElementById('drawer-btn') as HTMLButtonElement;
 export const promptAccepted = document.getElementById('prompt-accepted') as HTMLButtonElement;
 export const promptRejected = document.getElementById('prompt-rejected') as HTMLButtonElement;
+export const participants = document.getElementById('participants') as HTMLDivElement;
 export const dashBoardItem = document.querySelector('#dashboard ul') as HTMLUListElement;
 export const toolBarBtn = document.getElementById('toolbar-btn') as HTMLButtonElement;
 export const colorPicker = document.getElementById('color-picker') as HTMLInputElement;

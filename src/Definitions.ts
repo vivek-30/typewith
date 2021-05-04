@@ -8,3 +8,8 @@ export interface WorkType {
   content: string;
   color: string;
 }
+
+export interface User {
+  name: string;
+  id: string;
+}
