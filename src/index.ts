@@ -11,7 +11,7 @@ import {
 
 import {
   handlePromptAcceptance, handlePromptRejectance,
-  setWork
+  setWork, setParticipants
 } from './Helpers';
 
 import {
@@ -20,9 +20,10 @@ import {
 } from 'materialize-css';
 
 import { socket } from './socket';
-import { WorkType } from './Definitions';
+import { WorkType, User } from './Definitions';
 import './sass/index.scss';
 
+var activeUsers: User[] = [];
 let recentWorks = localStorage.getItem('TypeWithWorks');
 let savedWorks: WorkType[] = recentWorks ? JSON.parse(recentWorks) : [];
 setWork(savedWorks);
@@ -42,7 +43,7 @@ Tooltip.init(toolTipps, {
 });
 
 export const modalInstance = Modal.init(modal, {
-  dismissible: true,
+  dismissible: false,
   opacity: 0.6
 });
 
@@ -58,6 +59,23 @@ promptAccepted.addEventListener('click', handlePromptAcceptance);
 promptRejected.addEventListener('click', handlePromptRejectance);
 
 // Socket Events.
+socket.emit('get-users-list');
+
 socket.on('writing', (data: string) => {
   content.value = data;
+});
+
+socket.on('update-users-list', (people : User[]) => {
+  activeUsers = people;
+  setParticipants(people);
+});
+
+socket.on('new-user', (person : User) => {
+  activeUsers = [ ...activeUsers, person ];
+  setParticipants(activeUsers);
+});
+
+socket.on('remove-user', ({ id }: User) => {
+  activeUsers = activeUsers.filter(({ id: _id }) => _id !== id);
+  setParticipants(activeUsers);
 });
