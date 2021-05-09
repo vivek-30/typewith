@@ -1,7 +1,8 @@
 import {
   toolBarButton, toolTipps, drawerBtn,
   promptRejected, promptAccepted,
-  tools, content, modal, usersList
+  tools, content, modal, usersList,
+  shareInput
 } from './Elements';
 
 import {
@@ -23,6 +24,7 @@ import { socket } from './socket';
 import { WorkType, User } from './Definitions';
 import './sass/index.scss';
 
+var isSharedMode = shareInput.checked;
 var activeUsers: User[] = [];
 let recentWorks = localStorage.getItem('TypeWithWorks');
 let savedWorks: WorkType[] = recentWorks ? JSON.parse(recentWorks) : [];
@@ -52,7 +54,8 @@ Sidenav.init(usersList, {
 });
 
 // Events For DOM Elements.
-content.addEventListener('keyup', handleContentChange);
+content.addEventListener('keyup', (e) => handleContentChange(e, isSharedMode));
+shareInput.addEventListener('change', () => isSharedMode = shareInput.checked);
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
 promptAccepted.addEventListener('click', handlePromptAcceptance);

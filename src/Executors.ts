@@ -43,12 +43,14 @@ export const handleUsersToolChoice = (e: Event): void => {
   processChoice(toolName);
 }
 
-export const handleContentChange = (e: KeyboardEvent) => {
+export const handleContentChange = (e: KeyboardEvent, isSharedMode: boolean = false) => {
   isWorkSaved = false;
   if(e.key == 'Tab') {
     tabIndent(e);
   }
-  socket.emit('writing', content.value);
+  if(isSharedMode) {
+    socket.emit('writing', content.value);
+  }
 }
 
 export const processChoice = (tool: Tool): void => {
