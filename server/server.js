@@ -9,13 +9,13 @@ var filteredList = [];
 
 app.use(cors(
   {
-    origin: 'http://localhost:3000'
+    origin: 'https://typewith.netlify.app'
   }
 ));
 
 const io = socket(server, {
   cors: {
-    origin: 'http://localhost:3000',
+    origin: 'https://typewith.netlify.app',
     methods: ['GET', 'POST']
   }
 });

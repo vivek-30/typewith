@@ -1,3 +1,3 @@
 import io from 'socket.io-client';
-const URL = 'http://localhost:5000';
+const URL = 'https://type-with.herokuapp.com';
 export const socket = io(URL);
