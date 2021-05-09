@@ -9,6 +9,7 @@ import { WorkType, User } from './Definitions';
 import { toast } from 'materialize-css';
 import { modalInstance } from './index';
 
+export var openedWorkTitle = '';
 var workTitle: string;
 var oldWorks: WorkType[] = [];
 
@@ -106,6 +107,7 @@ export const openSelectedWork = (e: Event) => {
   let workTitle = work.innerText;
 
   if(workTitle !== 'No Saved Work Found !!!') {
+    openedWorkTitle = workTitle;
     let savedWorks = localStorage.getItem('TypeWithWorks');
     let parsedWorks: WorkType[] = savedWorks ? JSON.parse(savedWorks) : [];
     let searchedWork = parsedWorks.find(({ title }) => title === workTitle);

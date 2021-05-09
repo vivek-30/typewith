@@ -6,7 +6,8 @@ import {
 
 import {
   loadModal, displayPrompt, notify,
-  tabIndent, setWork, setName
+  tabIndent, setWork, setName,
+  openedWorkTitle
 } from './Helpers';
 
 import { socket } from './socket';
@@ -80,7 +81,7 @@ export const processChoice = (tool: Tool): void => {
       if (work === '') {
         notify('Please Add Some Work To Save.');
       }
-      else if (workTitle === '') {
+      else if (workTitle === '' && openedWorkTitle === '') {
         notify('Please Provide Work Title To Save.');
         const addButton = document.querySelector('#tools li a i[name="add"]') as HTMLElement;
         addButton?.click();
@@ -90,11 +91,12 @@ export const processChoice = (tool: Tool): void => {
         let oldWorks = localStorage.getItem('TypeWithWorks');
         savedWorks = oldWorks ? JSON.parse(oldWorks) as WorkType[] : savedWorks;
         let currentWork = {
-          title: workTitle,
+          title: workTitle === '' ? openedWorkTitle : workTitle,
           content: work,
           color: fontColor
         }
-        savedWorks = savedWorks.filter(({ title }) => title !== workTitle);
+        let searchedWorkTitle = workTitle === '' ? openedWorkTitle : workTitle;
+        savedWorks = savedWorks.filter(({ title }) => title !== searchedWorkTitle);
         savedWorks = [ ...savedWorks, currentWork ];
         localStorage.setItem('TypeWithWorks', JSON.stringify(savedWorks));
         setWork(savedWorks);
@@ -118,7 +120,8 @@ export const processChoice = (tool: Tool): void => {
 
     case 'delete': {
       if (content.value !== '') {
-        displayPrompt('Delete this work from saved space as well ?', workTitle);
+        let deleteWorkTitle = workTitle === '' ? openedWorkTitle : workTitle;
+        displayPrompt('Delete this work from saved space as well ?', deleteWorkTitle);
         workTitle = '';
         fontColor = '#000';
         isWorkSaved = false;
