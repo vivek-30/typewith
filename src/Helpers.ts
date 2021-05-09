@@ -13,6 +13,16 @@ export var openedWorkTitle = '';
 var workTitle: string;
 var oldWorks: WorkType[] = [];
 
+export const notify = (message: string): void => {
+  toast({
+    html: message,
+    inDuration: 800,
+    outDuration: 800,
+    displayLength: 5000,
+    classes: 'rounded black-text grey lighten-5'
+  });
+}
+
 export const loadModal = (title: string): void => {
   modalTitle.innerText = title;
   modalValue.value = '';
@@ -90,16 +100,6 @@ export const handlePromptAcceptance = (): void => {
   localStorage.setItem('TypeWithWorks', JSON.stringify(updatedWorks));
   setWork(updatedWorks);
   userPrompt.style.display = 'none';
-}
-
-export const notify = (message: string): void => {
-  toast({
-    html: message,
-    inDuration: 800,
-    outDuration: 800,
-    displayLength: 5000,
-    classes: 'rounded black-text grey lighten-5'
-  });
 }
 
 export const openSelectedWork = (e: Event) => {

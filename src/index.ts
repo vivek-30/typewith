@@ -2,7 +2,7 @@ import {
   toolBarButton, toolTipps, drawerBtn,
   promptRejected, promptAccepted,
   tools, content, modal, usersList,
-  shareInput, dashBoardItem
+  shareInput, dashBoardItem, readOnlyInput
 } from './Elements';
 
 import {
@@ -12,7 +12,7 @@ import {
 
 import {
   handlePromptAcceptance, handlePromptRejectance,
-  setWork, setParticipants, openSelectedWork
+  setWork, setParticipants, openSelectedWork, notify
 } from './Helpers';
 
 import {
@@ -25,6 +25,8 @@ import { WorkType, User } from './Definitions';
 import './sass/index.scss';
 
 var isSharedMode = shareInput.checked;
+var isWritingMode = readOnlyInput.checked;
+var isAsked = false;
 var activeUsers: User[] = [];
 let recentWorks = localStorage.getItem('TypeWithWorks');
 let savedWorks: WorkType[] = recentWorks ? JSON.parse(recentWorks) : [];
@@ -56,6 +58,11 @@ Sidenav.init(usersList, {
 // Events For DOM Elements.
 content.addEventListener('keyup', (e) => handleContentChange(e, isSharedMode));
 shareInput.addEventListener('change', () => isSharedMode = shareInput.checked);
+readOnlyInput.addEventListener('change', () => {
+  if(!shareInput.checked && readOnlyInput.checked)
+    shareInput.checked = true;
+  isWritingMode = readOnlyInput.checked
+});
 dashBoardItem.addEventListener('click', openSelectedWork);
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
@@ -66,7 +73,13 @@ promptRejected.addEventListener('click', handlePromptRejectance);
 socket.emit('get-users-list');
 
 socket.on('writing', (data: string) => {
-  content.value = data;
+  if (isWritingMode)
+    content.value = data;
+  else if (!isAsked) {
+    isAsked = true;
+    notify('Your Friend Wants To Help You Enable \"Write mode\"');
+  }
+
 });
 
 socket.on('update-users-list', (people : User[]) => {
