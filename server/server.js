@@ -20,6 +20,10 @@ const io = socket(server, {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('Server Is Successfully Running');
+});
+
 io.on('connection', (socket) => {
 
   const { id: ID } = socket;
