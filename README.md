@@ -29,6 +29,20 @@ It will allow users to make a project/work easily and quickly with teams collabo
   yarn run dev
 ```
 
+## ScreenShots -
+
+![ScreenShot1](ScreenShots/ScreenShot1.jpg)
+
+![ScreenShot5](ScreenShots/ScreenShot5.jpg)
+
+![ScreenShot2](ScreenShots/ScreenShot2.jpg)
+
+![ScreenShot3](ScreenShots/ScreenShot3.jpg)
+
+![ScreenShot4](ScreenShots/ScreenShot4.jpg)
+
+![ScreenShot6](ScreenShots/ScreenShot6.jpg)
+
 ## Demo -
 
-Deployed on Netlify and Heroku - [TypeWith](https://typewith.netlify.app)
+Deployed on Netlify and Heroku - <a href="https://typewith.netlify.app" target="_blank">TypeWith</a>
