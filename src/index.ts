@@ -2,7 +2,7 @@ import {
   toolBarButton, toolTipps, drawerBtn,
   promptRejected, promptAccepted,
   tools, content, modal, usersList,
-  shareInput
+  shareInput, dashBoardItem
 } from './Elements';
 
 import {
@@ -12,7 +12,7 @@ import {
 
 import {
   handlePromptAcceptance, handlePromptRejectance,
-  setWork, setParticipants
+  setWork, setParticipants, openSelectedWork
 } from './Helpers';
 
 import {
@@ -56,6 +56,7 @@ Sidenav.init(usersList, {
 // Events For DOM Elements.
 content.addEventListener('keyup', (e) => handleContentChange(e, isSharedMode));
 shareInput.addEventListener('change', () => isSharedMode = shareInput.checked);
+dashBoardItem.addEventListener('click', openSelectedWork);
 drawerBtn.addEventListener('click', handleSideBarDisplay);
 tools.addEventListener('click', handleUsersToolChoice);
 promptAccepted.addEventListener('click', handlePromptAcceptance);

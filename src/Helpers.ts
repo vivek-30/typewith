@@ -101,6 +101,19 @@ export const notify = (message: string): void => {
   });
 }
 
+export const openSelectedWork = (e: Event) => {
+  let work = e.target as HTMLLIElement;
+  let workTitle = work.innerText;
+
+  if(workTitle !== 'No Saved Work Found !!!') {
+    let savedWorks = localStorage.getItem('TypeWithWorks');
+    let parsedWorks: WorkType[] = savedWorks ? JSON.parse(savedWorks) : [];
+    let searchedWork = parsedWorks.find(({ title }) => title === workTitle);
+    content.value = searchedWork?.content || '';
+    content.style.color = searchedWork?.color || '#000';
+  }
+}
+
 export const tabIndent = (e: KeyboardEvent): void => {
   e.preventDefault();
   let start = content.selectionStart;
