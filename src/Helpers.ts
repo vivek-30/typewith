@@ -70,7 +70,6 @@ export const setName = (name: string) => {
         localStorage.setItem('MyTypeWithName', name);
       }
     });
-    // isNaming = false;
   }
   else {
     socket.emit('join-me', name);

@@ -17,12 +17,12 @@ var isDrawerClose = false;
 var fontColor = '#000';
 var workTitle = '';
 var isWorkSaved = true;
-var isOpening = false;
 var isNaming = true;
 
 setTimeout((): void => {
   var myName = localStorage.getItem('MyTypeWithName') || '';
   setName(myName);
+  isNaming = false;
 }, 1000);
 
 var savedWorks: WorkType[] = [];
@@ -58,7 +58,7 @@ export const processChoice = (tool: Tool): void => {
 
     case 'add': {
       loadModal('Enter Work Title.');
-      if(!isOpening && !isNaming) {
+      if(!isNaming) {
         modalButton.addEventListener('click', (): void => {
           workTitle = modalValue.value.trim();
           let checkWork = localStorage.getItem('TypeWithWorks');
@@ -102,28 +102,6 @@ export const processChoice = (tool: Tool): void => {
         notify('Work Saved Successfully.');
         isWorkSaved = true;
       }
-      break;
-    }
-
-    case 'folder_open': {
-      loadModal('Enter Work Name.');
-      isOpening = true;
-      modalButton.addEventListener('click', (): void => {
-        workTitle = modalValue.value.trim();
-        workTitle === '' ? notify('Please Enter A Valid Title') : modalInstance?.close();
-        let oldWorks = localStorage.getItem('TypeWithWorks');
-        if (oldWorks && workTitle !== '') {
-            let localWorks = JSON.parse(oldWorks) as WorkType[];
-            let searchedWork = localWorks.find(({ title }) => title === workTitle);
-            let searchedWorkContent = searchedWork ? searchedWork.content : '';
-            content.value = searchedWorkContent;
-            content.style.color = searchedWork ? searchedWork.color : fontColor;
-        }
-        else if (workTitle !== '') {
-          notify(`No Work Found With Title ${workTitle}`);
-        }
-      });
-      isOpening = false;
       break;
     }
 
