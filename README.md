@@ -45,4 +45,4 @@ It will allow users to make a project/work easily and quickly with teams collabo
 
 ## Demo -
 
-Deployed on Netlify and Heroku - <a href="https://typewith.netlify.app" target="_blank">TypeWith</a>
+Deployed on Netlify and Render - <a href="https://typewith.netlify.app" target="_blank">TypeWith</a>
